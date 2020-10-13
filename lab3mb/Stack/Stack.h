@@ -22,7 +22,7 @@ namespace mathTools
 
         void Print(); //вывод на экран(для отладки)
 
-        void Push(int a); //добавить элемент
+        virtual void Push(int a); //добавить элемент
 
         int Pop(); //убрать элемент
 
