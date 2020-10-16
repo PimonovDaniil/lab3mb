@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Deque\Deque.cpp" />
     <ClCompile Include="lab3mb.cpp" />
     <ClCompile Include="Queue\Queue.cpp" />
     <ClCompile Include="Stack\Stack.cpp" />
     <ClCompile Include="Vector\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Deque\Deque.h" />
     <ClInclude Include="Queue\Queue.h" />
     <ClInclude Include="Stack\Stack.h" />
     <ClInclude Include="Vector\Vector.h" />

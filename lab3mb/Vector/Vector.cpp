@@ -7,7 +7,9 @@ using namespace std;
 
 namespace mathTools
 {
-    
+    bool Vector::debug = false;
+    int Vector::num = 0; //начальное кол-во объектов класса
+
     void Vector::copy(const Vector& other) {
         if (this->m_data != nullptr) {
             delete[] this->m_data;
@@ -21,6 +23,7 @@ namespace mathTools
         this->cbegin = other.cbegin;
         this->cend = other.cend;
         this->m_data = new int[this->csize];
+
 
         for (int i = 0; i < this->csize; i++)
             this->m_data[i] = other.m_data[i];
@@ -39,6 +42,7 @@ namespace mathTools
     }
 
     Vector::Vector() {
+        this->numObj = ++this->num;
         this->reserve = 10;
         this->m_data = new int[this->reserve * 2];
         this->size = 0;
@@ -47,25 +51,28 @@ namespace mathTools
         this->end = this->reserve + 1;
         this->cbegin = 0;
         this->cend = this->reserve * 2 - 1;
+        if (debug) std::cout << "(вектор " << this->numObj << ", " << "конструктор)" << std::endl;
     }
 
     /*конструктор копирования*/
     Vector::Vector(Vector& other) {
         this->m_data = nullptr;
-        //this->numObj = ++this->num;
+        this->numObj = ++this->num;
         copy(other);
-        //if (debug) std::cout << "(матрица " << this->numObj << ", " << "конструктор копирования)" << std::endl;
+        if (debug) std::cout << "(вектор " << this->numObj << ", " << "конструктор копирования)" << std::endl;
     }
 
     Vector::Vector(Vector&& m) noexcept //move конструктор
     {
         this->m_data = nullptr;
-        //this->numObj = ++this->num;
-        swap(m);
+        this->swap(m);
+        this->numObj = ++this->num;
+        if (debug) std::cout << "(вектор " << this->numObj << ", " << "move конструктор)" << std::endl;
     }
 
     Vector::~Vector() {
         if (this->m_data != nullptr) delete[] this->m_data;
+        if (debug) std::cout << "(вектор " << this->numObj << ", " << "деструктор)" << std::endl;
     }
 
     void Vector::Reserve(int a) {
@@ -75,6 +82,7 @@ namespace mathTools
     /*подмена понятий (перегрузка)*/
     Vector& Vector::operator=(const Vector& other)
     {
+        this->numObj = ++this->num;
         // Проверка на самоприсваивание
         if (this != &other) copy(other);
         return *this;
@@ -82,7 +90,7 @@ namespace mathTools
 
     Vector& Vector::operator=(Vector&& m) noexcept //move
     {
-        //this->numObj = ++this->num;
+        this->numObj = ++this->num;
         swap(m);
         return *this;
     }

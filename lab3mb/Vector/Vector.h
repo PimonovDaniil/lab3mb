@@ -13,6 +13,8 @@ namespace mathTools
         int end;
         int cbegin;
         int cend;
+        int numObj;
+        static int num;
 
         void copy(const Vector& other);
 
@@ -44,6 +46,8 @@ namespace mathTools
         int rpop();
 
     public:
+        static bool debug;
+
         void Reserve(int a);
 
         void print();

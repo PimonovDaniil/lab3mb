@@ -27,6 +27,9 @@
     <ClCompile Include="Vector\Vector.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Deque\Deque.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stack\Stack.h">
@@ -36,6 +39,9 @@
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Vector\Vector.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Deque\Deque.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
