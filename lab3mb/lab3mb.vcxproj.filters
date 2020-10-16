@@ -24,12 +24,18 @@
     <ClCompile Include="Queue\Queue.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Vector\Vector.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stack\Stack.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Queue\Queue.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector\Vector.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>

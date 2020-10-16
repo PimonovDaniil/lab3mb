@@ -1,0 +1,56 @@
+﻿#pragma once
+
+namespace mathTools
+{
+
+    class Vector {
+    private:
+        int* m_data;
+        int size;
+        int csize;
+        int reserve;
+        int begin;
+        int end;
+        int cbegin;
+        int cend;
+
+        void copy(const Vector& other);
+
+        void memoryAdd(); //добавляет память если надо
+
+        void swap(Vector& m);
+
+    protected:
+        Vector();
+
+        /*конструктор копирования*/
+        Vector(Vector& other);
+
+        Vector(Vector&& m) noexcept; //move конструктор
+
+        ~Vector();
+
+        /*подмена понятий (перегрузка)*/
+        Vector& operator=(const Vector& other);
+
+        Vector& operator=(Vector&& m) noexcept; //move
+
+        void lpush(int a);
+
+        int lpop();
+
+        void rpush(int a);
+
+        int rpop();
+
+    public:
+        void Reserve(int a);
+
+        void print();
+
+        bool isEmpty();
+
+        int Top();
+    };
+
+}

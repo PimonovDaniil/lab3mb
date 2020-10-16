@@ -1,11 +1,18 @@
 ﻿#pragma once
-#include "../Stack/Stack.h"
+#include "../Vector/Vector.h"
 namespace mathTools
 {
 
-    class Queue : public Stack {
+    class Queue : public Vector {
+    private:
+        using Vector::lpush;
+        using Vector::rpush;
+        using Vector::lpop;
+        using Vector::rpop;
+
     public:
-        void Push(int a) override; //добавить элемент
+        void Enqueue(int a); //добавить элемент
+        int Dequeue(); //добавить элемент
     };
 
 }

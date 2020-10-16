@@ -142,10 +142,12 @@
     <ClCompile Include="lab3mb.cpp" />
     <ClCompile Include="Queue\Queue.cpp" />
     <ClCompile Include="Stack\Stack.cpp" />
+    <ClCompile Include="Vector\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Queue\Queue.h" />
     <ClInclude Include="Stack\Stack.h" />
+    <ClInclude Include="Vector\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
