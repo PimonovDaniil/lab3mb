@@ -2,6 +2,7 @@
 #include "Stack/Stack.h"
 #include "Queue/Queue.h"
 #include <iostream>
+#include <utility>
 using namespace mathTools;
 using namespace std;
 
@@ -33,6 +34,18 @@ private:
             this->m_data[i] = other.m_data[i];
     }
 
+    void swap(Vector& m)
+    {
+        std::swap(this->size, m.size);
+        std::swap(this->csize, m.csize);
+        std::swap(this->reserve, m.reserve);
+        std::swap(this->begin, m.begin);
+        std::swap(this->end, m.end);
+        std::swap(this->cbegin, m.cbegin);
+        std::swap(this->cend, m.cend);
+        std::swap(this->m_data, m.m_data);
+    }
+
 protected:
     Vector() {
         this->reserve = 10;
@@ -53,7 +66,12 @@ protected:
         //if (debug) std::cout << "(матрица " << this->numObj << ", " << "конструктор копирования)" << std::endl;
     }
 
-
+    Vector(Vector&& m) noexcept //move конструктор
+    {
+        this->m_data = nullptr;
+        //this->numObj = ++this->num;
+        swap(m);
+    }
 
     ~Vector() {
         if (this->m_data != nullptr) delete[] this->m_data;
@@ -68,6 +86,13 @@ protected:
     {
         // Проверка на самоприсваивание
         if (this != &other) copy(other);
+        return *this;
+    }
+
+    Vector& operator=(Vector&& m) noexcept //move
+    {
+        //this->numObj = ++this->num;
+        swap(m);
         return *this;
     }
 
@@ -127,8 +152,6 @@ protected:
         for (int i = 0; i <= this->cend; i++)
             cout << this->m_data[i] << " ";
     }
-
-
 };
 
 int main()/*тесты*/
