@@ -3,23 +3,26 @@
 #include "Queue/Queue.h"
 #include "Vector/Vector.h"
 #include <iostream>
-#include <utility>
 using namespace mathTools;
 using namespace std;
 
 int main()/*тесты*/
 {
-    /*Stack a;
+    Stack a;
     a.Push(1);
+    cout << "Stack a: ";  a.print(); cout << endl;
     a.Push(2);
+    cout << "Stack a: ";  a.print(); cout << endl;
     a.Pop();
+    cout << "Stack a: ";  a.print(); cout << endl;
     a.Push(3);
+    cout << "Stack a: ";  a.print(); cout << endl;
     Stack b;
     b = a;
     a.Push(4);
     b.Push(5);
-    printf("Stack a: "); a.Print();
-    printf("Stack b: "); b.Print();*/
+    printf("Stack a: "); a.print();
+    printf("Stack b: "); b.print(); cout << endl << endl;
 
     Queue c;
     c.Enqueue(1);

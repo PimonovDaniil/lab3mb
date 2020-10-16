@@ -1,34 +1,20 @@
 ﻿#pragma once
+#include "../Vector/Vector.h"
 
 namespace mathTools
 {
 
-    class Stack {
-    protected:
-        int* m_data;
-        int size;
+    class Stack : public Vector{
 
     private:
-        void copy(const Stack& other);
+        using Vector::lpush;
+        using Vector::rpush;
+        using Vector::lpop;
+        using Vector::rpop;
 
     public:
-        Stack(); //стандартный конструктор
-
-        Stack(const Stack& other); // конструктор копирования
-
-        ~Stack(); //деструктор
-
-        Stack& operator=(const Stack& other); //подмена понятий
-
-        void Print(); //вывод на экран(для отладки)
-
-        virtual void Push(int a); //добавить элемент
-
-        int Pop(); //убрать элемент
-
-        int Top(); // проверить верхний элемент
-
-        bool IsEmpty(); // проверка на пустоту
+        void Push(int a);
+        int Pop();
     };
 
 }

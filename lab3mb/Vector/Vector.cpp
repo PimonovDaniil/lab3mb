@@ -44,7 +44,7 @@ namespace mathTools
         this->size = 0;
         this->csize = this->reserve * 2;
         this->begin = this->reserve;
-        this->end = this->reserve - 1;
+        this->end = this->reserve + 1;
         this->cbegin = 0;
         this->cend = this->reserve * 2 - 1;
     }
@@ -140,7 +140,7 @@ namespace mathTools
     }
 
     void Vector::print() {
-        for (int i = this->begin + 1; i <= this->end +1 ; i++)
+        for (int i = this->begin + 1; i <= this->end -1; i++)
             cout << this->m_data[i] << " ";
     }
 
