@@ -15,22 +15,60 @@ private:
     int end;
     int cbegin;
     int cend;
-    //capacity
+    void copy(const Vector& other) {
+        if(this->m_data != nullptr) {
+            delete[] this->m_data;
+        }
+
+        this->size = other.size;
+        this->csize = other.csize;
+        this->reserve = other.reserve;
+        this->begin = other.begin;
+        this->end = other.end;
+        this->cbegin = other.cbegin;
+        this->cend = other.cend;
+        this->m_data = new int[this->csize];
+
+        for (int i = 0; i < this->csize; i++)
+            this->m_data[i] = other.m_data[i];
+    }
 
 protected:
     Vector() {
         this->reserve = 10;
         this->m_data = new int[this->reserve * 2];
         this->size = 0;
-        this->csize = 10 * 2;
-        this->begin = 10 ;
-        this->end = 10 - 1;
+        this->csize = this->reserve * 2;
+        this->begin = this->reserve;
+        this->end = this->reserve - 1;
         this->cbegin = 0;
-        this->cend = 10 * 2 - 1;
+        this->cend = this->reserve * 2 - 1;
+    }
+
+    /*конструктор копирования*/
+    Vector(Vector& other) {
+        this->m_data = nullptr;
+        //this->numObj = ++this->num;
+        copy(other);
+        //if (debug) std::cout << "(матрица " << this->numObj << ", " << "конструктор копирования)" << std::endl;
+    }
+
+
+
+    ~Vector() {
+        if (this->m_data != nullptr) delete[] this->m_data;
     }
 
     void Reserve(int a) {
         this->reserve = a;
+    }
+
+    /*подмена понятий (перегрузка)*/
+    Vector& operator=(const Vector& other)
+    {
+        // Проверка на самоприсваивание
+        if (this != &other) copy(other);
+        return *this;
     }
 
     void memoryAdd() {
