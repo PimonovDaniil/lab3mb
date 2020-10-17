@@ -10,6 +10,7 @@ namespace mathTools
 	{
 		this->rpush(a);
 	}
+
 	int Stack::Pop()
 	{
 		return this->rpop();
