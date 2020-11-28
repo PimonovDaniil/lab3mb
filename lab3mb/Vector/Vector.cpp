@@ -10,37 +10,6 @@ namespace mathTools
     bool Vector::debug = false;
     int Vector::num = 0; //начальное кол-во объектов класса
 
-    void Vector::copy(const Vector& other) {
-        if (this->m_data != nullptr) {
-            delete[] this->m_data;
-        }
-
-        this->size = other.size;
-        this->csize = other.csize;
-        this->reserve = other.reserve;
-        this->begin = other.begin;
-        this->end = other.end;
-        this->cbegin = other.cbegin;
-        this->cend = other.cend;
-        this->m_data = new int[this->csize];
-
-
-        for (int i = 0; i < this->csize; i++)
-            this->m_data[i] = other.m_data[i];
-    }
-
-    void Vector::swap(Vector& m)
-    {
-        std::swap(this->size, m.size);
-        std::swap(this->csize, m.csize);
-        std::swap(this->reserve, m.reserve);
-        std::swap(this->begin, m.begin);
-        std::swap(this->end, m.end);
-        std::swap(this->cbegin, m.cbegin);
-        std::swap(this->cend, m.cend);
-        std::swap(this->m_data, m.m_data);
-    }
-
     Vector::Vector() {
         this->numObj = ++this->num;
         this->reserve = 10;
@@ -58,14 +27,15 @@ namespace mathTools
     Vector::Vector(Vector& other) {
         this->m_data = nullptr;
         this->numObj = ++this->num;
-        copy(other);
+        //copy(other);
+        *this = other;
         if (debug) std::cout << "(вектор " << this->numObj << ", " << "конструктор копирования)" << std::endl;
     }
 
     Vector::Vector(Vector&& m) noexcept //move конструктор
     {
         this->m_data = nullptr;
-        this->swap(m);
+        *this = std::move(m);
         this->numObj = ++this->num;
         if (debug) std::cout << "(вектор " << this->numObj << ", " << "move конструктор)" << std::endl;
     }
@@ -84,14 +54,40 @@ namespace mathTools
     {
         this->numObj = ++this->num;
         // Проверка на самоприсваивание
-        if (this != &other) copy(other);
+        if (this != &other) {
+            //copy(other);
+            if (this->m_data != nullptr) {
+                delete[] this->m_data;
+            }
+
+            this->size = other.size;
+            this->csize = other.csize;
+            this->reserve = other.reserve;
+            this->begin = other.begin;
+            this->end = other.end;
+            this->cbegin = other.cbegin;
+            this->cend = other.cend;
+            this->m_data = new int[this->csize];
+
+
+            for (int i = 0; i < this->csize; i++)
+                this->m_data[i] = other.m_data[i];
+        }
         return *this;
     }
 
     Vector& Vector::operator=(Vector&& m) noexcept //move
     {
         this->numObj = ++this->num;
-        swap(m);
+        //swap(m);
+        std::swap(this->size, m.size);
+        std::swap(this->csize, m.csize);
+        std::swap(this->reserve, m.reserve);
+        std::swap(this->begin, m.begin);
+        std::swap(this->end, m.end);
+        std::swap(this->cbegin, m.cbegin);
+        std::swap(this->cend, m.cend);
+        std::swap(this->m_data, m.m_data);
         return *this;
     }
 
