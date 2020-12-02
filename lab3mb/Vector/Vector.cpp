@@ -28,16 +28,16 @@ namespace mathTools
         this->m_data = nullptr;
         this->numObj = ++this->num;
         //copy(other);
-        *this = other;
         if (debug) std::cout << "(вектор " << this->numObj << ", " << "конструктор копирования)" << std::endl;
+        *this = other;
     }
 
     Vector::Vector(Vector&& m) noexcept //move конструктор
     {
         this->m_data = nullptr;
-        *this = std::move(m);
         this->numObj = ++this->num;
         if (debug) std::cout << "(вектор " << this->numObj << ", " << "move конструктор)" << std::endl;
+        *this = std::move(m);
     }
 
     Vector::~Vector() {
@@ -52,7 +52,7 @@ namespace mathTools
     /*подмена понятий (перегрузка)*/
     Vector& Vector::operator=(const Vector& other)
     {
-        this->numObj = ++this->num;
+        if (debug) std::cout << "(копируем в" << this->numObj << " из " << other.numObj << ")\n";
         // Проверка на самоприсваивание
         if (this != &other) {
             //copy(other);
@@ -70,15 +70,17 @@ namespace mathTools
             this->m_data = new int[this->csize];
 
 
-            for (int i = 0; i < this->csize; i++)
-                this->m_data[i] = other.m_data[i];
+            /*for (int i = 0; i < this->csize; i++)
+                this->m_data[i] = other.m_data[i];*/
+            std::copy(other.m_data, other.m_data + this->csize, this->m_data);
+
         }
         return *this;
     }
 
     Vector& Vector::operator=(Vector&& m) noexcept //move
     {
-        this->numObj = ++this->num;
+        if (debug) std::cout << "(копируем в" << this->numObj << " из " << m.numObj << ")\n";
         //swap(m);
         std::swap(this->size, m.size);
         std::swap(this->csize, m.csize);

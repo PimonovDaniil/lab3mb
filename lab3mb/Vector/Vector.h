@@ -6,22 +6,17 @@ namespace mathTools
     class Vector {
     private:
         int* m_data;
-        int size;
-        int csize;
-        int reserve;
-        int begin;
-        int end;
-        int cbegin;
-        int cend;
+        int size; //размер заполненой части векора
+        int csize; //весь размер выделенной памяти
+        int reserve; //сколько зарезервировать
+        int begin; //начало заполненной части вектора
+        int end; //конец заполненной части вектора
+        int cbegin;//начало выделенной памяти
+        int cend;//конец выделенной памяти
         int numObj;
         static int num;
 
-        void copy(const Vector& other);
-
         void memoryAdd(); //добавляет память если надо
-
-        void swap(Vector& m);
-
     protected:
         Vector();
 
