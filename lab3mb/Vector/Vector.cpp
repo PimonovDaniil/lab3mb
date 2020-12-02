@@ -146,7 +146,7 @@ namespace mathTools
     }
 
     void Vector::print() {
-        for (int i = this->begin + 1; i <= this->end -1; i++)
+        for (int i = this->begin + 1; i <= this->end - 1; i++)
             cout << this->m_data[i] << " ";
     }
 
@@ -158,7 +158,7 @@ namespace mathTools
     int Vector::Top()
     {
         if (this->size <= 0) throw "выход за пределы";
-        return this->m_data[this->end+1];
+        return this->m_data[this->end + 1];
     }
 
 }

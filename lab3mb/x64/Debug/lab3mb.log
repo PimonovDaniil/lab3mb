@@ -1,2 +1,8 @@
-﻿  Vector.cpp
+﻿  Deque.cpp
+  Queue.cpp
+  Stack.cpp
+  Vector.cpp
+  lab3mb.cpp
+  Создание кода...
+  LINK : не найден или не выполнена сборка C:\Users\Даниил\source\repos\lab3mb\x64\Debug\lab3mb.exe при последней инкрементной компоновке; выполняется полная компоновка
   lab3mb.vcxproj -> C:\Users\Даниил\source\repos\lab3mb\x64\Debug\lab3mb.exe
