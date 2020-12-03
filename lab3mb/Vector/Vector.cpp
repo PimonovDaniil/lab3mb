@@ -16,10 +16,10 @@ namespace mathTools
         this->m_data = new int[this->reserve * 2];
         this->size = 0;
         this->csize = this->reserve * 2;
-        this->begin = this->reserve;
-        this->end = this->reserve + 1;
-        this->cbegin = 0;
-        this->cend = this->reserve * 2 - 1;
+        this->begin = &this->m_data[this->reserve];
+        this->end = &this->m_data[this->reserve + 1];
+        this->cbegin = &this->m_data[0];
+        this->cend = &this->m_data[this->reserve * 2 - 1];
         if (debug) std::cout << "(вектор " << this->numObj << ", " << "конструктор)" << std::endl;
     }
 
@@ -94,31 +94,30 @@ namespace mathTools
     }
 
     void Vector::memoryAdd() {
-        if (this->end > this->cend) {
+        if (this->end == this->cend) {
             int* new_m_data = new int[this->size + this->reserve]();
             for (int i = 0; i < this->csize; i -= -1)
                 new_m_data[i] = this->m_data[i];
-            this->cend += this->reserve;
-            this->csize += this->reserve;
             delete[] this->m_data;
             this->m_data = new_m_data;
+            this->cend += this->reserve;
+            this->csize += this->reserve;
         }
-        else if (this->begin < this->cbegin) {
+        else if (this->begin == this->cbegin) {
             int* new_m_data = new int[this->size + this->reserve]();
             for (int i = 0; i < this->csize; i -= -1)
                 new_m_data[this->reserve + i] = this->m_data[i];
             delete[] this->m_data;
 
-
-            this->csize += this->reserve;
-            this->cbegin = 0;
-            this->cend = this->csize - 1;
             this->m_data = new_m_data;
+            this->csize += this->reserve;
+            this->cbegin = &this->m_data[0];
+            this->cend = &this->m_data[this->csize - 1];
         }
     }
 
     void Vector::lpush(int a) {
-        this->m_data[this->begin] = a;
+        *this->begin = a;
         this->begin--;
         this->size++;
         this->memoryAdd();
@@ -127,12 +126,13 @@ namespace mathTools
     int Vector::lpop() {
         if (this->size <= 0) throw "выход за пределы";
         this->size--;
+        int a = *this->begin;
         this->begin++;
-        return this->m_data[this->begin - 1];
+        return a;
     }
 
     void Vector::rpush(int a) {
-        this->m_data[this->end] = a;
+        *this->end = a;
         this->end++;
         this->size++;
         this->memoryAdd();
@@ -141,13 +141,14 @@ namespace mathTools
     int Vector::rpop() {
         if (this->size <= 0) throw "выход за пределы";
         this->size--;
+        int a = *this->end;
         this->end--;
-        return this->m_data[this->end - 1];
+        return a;
     }
 
     void Vector::print() {
-        for (int i = this->begin + 1; i <= this->end - 1; i++)
-            cout << this->m_data[i] << " ";
+        for (int* i = this->begin + 1; i <= this->end - 1; i++)
+            cout << *i << " ";
     }
 
     bool Vector::isEmpty()
@@ -158,7 +159,8 @@ namespace mathTools
     int Vector::Top()
     {
         if (this->size <= 0) throw "выход за пределы";
-        return this->m_data[this->end + 1];
+
+        return *this->end;
     }
 
 }

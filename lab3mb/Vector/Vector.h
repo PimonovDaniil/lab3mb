@@ -9,10 +9,10 @@ namespace mathTools
         int size;
         int csize;
         int reserve;
-        int begin;
-        int end;
-        int cbegin;
-        int cend;
+        int* begin;
+        int* end;
+        int* cbegin;
+        int* cend;
         int numObj;
         static int num;
 
