@@ -15,12 +15,7 @@ namespace mathTools
         int* cend;
         int numObj;
         static int num;
-
-        void copy(const Vector& other);
-
         void memoryAdd(); //добавляет память если надо
-
-        void swap(Vector& m);
 
     protected:
         Vector();

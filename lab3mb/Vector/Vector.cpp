@@ -19,7 +19,7 @@ namespace mathTools
         this->begin = &this->m_data[this->reserve];
         this->end = &this->m_data[this->reserve + 1];
         this->cbegin = &this->m_data[0];
-        this->cend = &this->m_data[this->reserve * 2 - 1];
+        this->cend = &this->m_data[this->reserve * 2];
         if (debug) std::cout << "(вектор " << this->numObj << ", " << "конструктор)" << std::endl;
     }
 
@@ -94,25 +94,23 @@ namespace mathTools
     }
 
     void Vector::memoryAdd() {
-        if (this->end == this->cend) {
-            int* new_m_data = new int[this->size + this->reserve]();
-            for (int i = 0; i < this->csize; i -= -1)
-                new_m_data[i] = this->m_data[i];
+        if ((this->end == this->cend) || (this->begin == this->cbegin)) {
+            int* new_m_data = new int[this->csize + (this->reserve*2)]();
+            int k = this->reserve;
+            for (int* i = this->begin + 1; i <= this->end - 1; i++) {
+                new_m_data[k] = *i;
+                k++;
+            }
             delete[] this->m_data;
             this->m_data = new_m_data;
-            this->cend += this->reserve;
             this->csize += this->reserve;
-        }
-        else if (this->begin == this->cbegin) {
-            int* new_m_data = new int[this->size + this->reserve]();
-            for (int i = 0; i < this->csize; i -= -1)
-                new_m_data[this->reserve + i] = this->m_data[i];
-            delete[] this->m_data;
-
-            this->m_data = new_m_data;
-            this->csize += this->reserve;
-            this->cbegin = &this->m_data[0];
-            this->cend = &this->m_data[this->csize - 1];
+            this->cend = &this->m_data[this->csize];
+            this->end = &this->m_data[this->size+ this->reserve];
+            this->begin = &this->m_data[this->reserve];
+            this->cbegin = &this->m_data[0];  
+            /*for (int i = 0; i < this->csize; i++) {
+                cout << this->m_data[i] << " ";
+            }*/
         }
     }
 
