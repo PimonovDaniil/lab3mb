@@ -46,6 +46,10 @@ int main()/*тесты*/
     printf("Queue c: "); c.print(); printf("Queue d: "); d.print(); printf("\n\n");
 
     Deque f;
+    for (int i = 0; i < 20; i++) {
+        f.PushFront(i);
+    }
+    f.print();
     f.PushFront(1);
     cout << "Deque f: ";  f.print(); cout << endl;
     f.PushFront(2);

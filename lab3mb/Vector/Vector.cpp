@@ -69,9 +69,6 @@ namespace mathTools
             this->cend = other.cend;
             this->m_data = new int[this->csize];
 
-
-            /*for (int i = 0; i < this->csize; i++)
-                this->m_data[i] = other.m_data[i];*/
             std::copy(other.m_data, other.m_data + this->csize, this->m_data);
 
         }
@@ -106,11 +103,8 @@ namespace mathTools
             this->csize += this->reserve;
             this->cend = &this->m_data[this->csize];
             this->end = &this->m_data[this->size+ this->reserve];
-            this->begin = &this->m_data[this->reserve];
+            this->begin = &this->m_data[this->reserve-1];
             this->cbegin = &this->m_data[0];  
-            /*for (int i = 0; i < this->csize; i++) {
-                cout << this->m_data[i] << " ";
-            }*/
         }
     }
 
